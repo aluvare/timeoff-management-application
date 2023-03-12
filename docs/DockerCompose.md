@@ -60,7 +60,7 @@ cat <<EOF >config/db.json
   },
   "production": {
     "username": "root",
-    "password": "FWerifjoewirfjWEFQqwdjoidqwejddojiq",
+    "password": "superpasswordDB",
     "database": "timeoff",
     "host": "mariadb",
     "dialect": "mysql"
@@ -81,15 +81,17 @@ Creating docker-compose.yml
 
 ```
 cat <<EOF >docker-compose.yml
-version: '2.2'
+version: '3.5'
+
 services:
+
   timeoff:
-    image: 'ghcr.io/aluvare/timeoff-management-application/timeoff-management-application:1.4'
+    image: blinkit-timeoff:v0
     restart: always
     ports:
-      - "3000:3000"
+      - "80:3000"
     volumes:
-      - ./config:/app/config
+      - /ebs/deploy/config:/app/config
     environment:
       - NODE_ENV=production
     depends_on:
@@ -99,17 +101,19 @@ services:
       interval: 10s
       retries: 12
       test: curl --write-out 'HTTP %{http_code}' --fail --silent --output /dev/null http://localhost:3000/
+
   mariadb:
     image: bitnami/mariadb:10.8
     restart: always
     volumes:
-      - ./mariadb:/bitnami/mariadb
+      - /ebs/deploy/mariadb:/bitnami/mariadb
     environment:
-      - MARIADB_ROOT_PASSWORD=FWerifjoewirfjWEFQqwdjoidqwejddojiq
+      - MARIADB_ROOT_PASSWORD=superpasswordDB
       - MARIADB_DATABASE=timeoff
     healthcheck:
-      interval: 10s
+      interval: 5s
       retries: 12
       test: /opt/bitnami/scripts/mariadb/healthcheck.sh
+
 EOF
 ```
