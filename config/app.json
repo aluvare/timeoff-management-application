@@ -1,13 +1,12 @@
 {
-  "allow_create_new_accounts" : true,
-  "send_emails"              : false,
-  "application_sender_email" : "email@test.com",
+  "allow_create_new_accounts" : false,
+  "send_emails"              : true,
+  "application_sender_email" : "an_email@blinkit.com.ar",
   "email_transporter" : {
-    "host" : "localhost",
-    "port" : 25,
+    "service" : "gmail",
     "auth" : {
-      "user" : "user",
-      "pass" : "pass"
+      "user" : "an_email@blinkit.com.ar",
+      "pass" : "superpassword"
     }
   },
   "sessionStore": {
@@ -18,8 +17,8 @@
     }
   },
   "ga_analytics_on" : false,
-  "crypto_secret" : "!2~`HswpPPLa22+=±§sdq qwe,appp qwwokDF_",
-  "application_domain" : "http://app.timeoff.management",
-  "promotion_website_domain" : "http://timeoff.management",
+  "crypto_secret" : "!2~HswpPPLa22+=±§sdq qwe,appp qwwokDF_",
+  "application_domain" : "https://timeoff.blinkit.com.ar",
+  "promotion_website_domain" : "https://timeoff.blinkit.com.ar",
   "locale_code_for_sorting": "en"
 }
